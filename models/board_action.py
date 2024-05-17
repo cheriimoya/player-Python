@@ -8,11 +8,6 @@ class BoardAction(PlayerAction):
     player: int  # uid of the owning player
     progress: Progress  # progress of the units on the path
 
-    @classmethod
-    def fromAttributes(cls, uuid: UUID, player: int, progress: Progress):
-        boardaction = {"uuid": uuid, "player": player, "progress": progress}
-        return cls(boardaction)
-
     def __init__(self, boardaction: dict):
         super().__init__(boardaction['src'], boardaction['dest'], boardaction['amount'])
         self.uuid = UUID(boardaction["uuid"])
