@@ -46,7 +46,8 @@ class OwnState:
 
 
 def decide(gamestate: GameState) -> List[PlayerAction]:
-
+    print("Deciding")
+    print(gamestate)
     own_state = OwnState(gamestate)
 
     actions = []
