@@ -23,6 +23,7 @@ class OwnState:
         self.occupied_bases = [base for base in gamestate.bases if base.player and base.player != gamestate.game.player]
         self.occupied_kd_tree = KDTree([[base.position.x, base.position.y, base.position.z, base] for base in self.occupied_bases], 3)
         self.own_bases = [base for base in gamestate.bases if base.player == gamestate.game.player]
+        print("own_bases", self.own_bases)
         self.own_kd_tree = KDTree([[base.position.x, base.position.y, base.position.z, base] for base in self.own_bases], 3)
 
 
