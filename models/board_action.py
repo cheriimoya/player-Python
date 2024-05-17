@@ -14,7 +14,7 @@ class BoardAction(PlayerAction):
         return cls(boardaction)
 
     def __init__(self, boardaction: dict):
-        super().__init__(boardaction)
+        super().__init__(boardaction['src'], boardaction['dest'], boardaction['amount'])
         self.uuid = UUID(boardaction["uuid"])
         self.player = boardaction["player"]
         self.progress = Progress(boardaction["progress"])
