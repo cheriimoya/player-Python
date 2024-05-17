@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class PlayerAction:
     src: int  # uid of source base
     dest: int  # uid of destination base

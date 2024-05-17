@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Game:
     uid: int  # uid of game
     tick: int  # tick in game
@@ -5,16 +9,6 @@ class Game:
     remaining_players: int  # number of players remaining
     player: int  # uid of your player
 
-    @classmethod
-    def fromAttributes(cls, uid: int, tick: int, playerCount: int, remainingPlayers: int, player: int):
-        game = {
-            "uid": uid,
-            "tick": tick,
-            "player_count": playerCount,
-            "remaining_players": remainingPlayers,
-            "player": player,
-        }
-        return cls(game)
 
     def __init__(self, game: dict):
         self.uid = game["uid"]

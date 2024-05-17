@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class BaseLevel:
     max_population: int  # number of sustainable bits
     upgrade_cost: int  # bits required to unlock next upgrade

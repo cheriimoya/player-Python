@@ -33,6 +33,7 @@ class OwnState:
             nearest_own = self.own_kd_tree.get_nearest([unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z])
             nearest_occupied = self.occupied_kd_tree.get_nearest([unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z])
 
+            print("kd-res", nearest_own, nearest_occupied)
 
             if getdistance(nearest_own[0], nearest_own[1], nearest_own[2], unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z) < getdistance(nearest_occupied[0], nearest_occupied[1], nearest_occupied[2], unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z):
                 no_brainers.append((unoccupied_base, nearest_own[3]))
