@@ -13,7 +13,7 @@ class Base:
     units_until_upgrade: int  # bits needed for until the next upgrade
 
     def __init__(self, base: dict):
-        self.position = base["position"]
+        self.position = Position(base["position"])
         self.uid = base["uid"]
         self.player = base["player"]
         self.population = base["population"]
