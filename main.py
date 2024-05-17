@@ -15,4 +15,5 @@ def identify():
 
 @app.route("/", methods=["POST"])
 def index():
+    print("index")
     return jsonify([d.serialize() for d in decide(GameState(request.get_json()))])
