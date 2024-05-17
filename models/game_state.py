@@ -12,17 +12,11 @@ class GameState:
 
     @classmethod
     def fromAttributes(cls, actions: list[BoardAction], bases: list[Base], config: GameConfig, game: Game):
-        gameState = {
-            'actions': actions,
-            'bases': bases,
-            'config': config,
-            'game': game
-        }
+        gameState = {"actions": actions, "bases": bases, "config": config, "game": game}
         return cls(gameState)
 
-
     def __init__(self, gameState: dict) -> None:
-        self.actions = gameState['actions']
-        self.bases = gameState['bases']
-        self.config = gameState['config']
-        self.game = gameState['game']
+        self.actions = gameState["actions"]
+        self.bases = gameState["bases"]
+        self.config = gameState["config"]
+        self.game = gameState["game"]

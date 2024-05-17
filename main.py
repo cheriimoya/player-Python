@@ -7,11 +7,12 @@ from models.game_state import GameState
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/', methods=['GET'])
+
+@app.route("/", methods=["GET"])
 def identify():
-    return 'Bitwars Python-Player'
+    return "Bitwars Python-Player"
 
 
-@app.route('/', methods=['POST'])
+@app.route("/", methods=["POST"])
 def index():
     return jsonify([d.serialize() for d in decide(GameState(request.get_json()))])
