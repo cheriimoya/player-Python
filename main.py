@@ -10,7 +10,7 @@ CORS(app)
 
 @app.route("/", methods=["GET"])
 def identify():
-    return "Bitwars Python-Player"
+    return "Team ricardo is best for real"
 
 
 @app.route("/", methods=["POST"])
