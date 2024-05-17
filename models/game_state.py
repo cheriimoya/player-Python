@@ -16,7 +16,7 @@ class GameState:
         return cls(gameState)
 
     def __init__(self, gameState: dict) -> None:
-        self.actions = gameState["actions"]
-        self.bases = gameState["bases"]
-        self.config = gameState["config"]
-        self.game = gameState["game"]
+        self.actions = [BoardAction(a) for a in  gameState["actions"]]
+        self.bases = [Base(b) for b in gameState["bases"]]
+        self.config = GameConfig(gameState["config"])
+        self.game = Game(gameState["game"])

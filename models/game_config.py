@@ -25,5 +25,5 @@ class GameConfig:
         return cls(gameconfig)
 
     def __init__(self, gameconfig: dict) -> None:
-        self.base_levels = gameconfig["base_levels"]
-        self.paths = gameconfig["paths"]
+        self.base_levels = [BaseLevel(l) for l in gameconfig["base_levels"]]
+        self.paths = PathsConfig(gameconfig["paths"])
