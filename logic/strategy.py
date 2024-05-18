@@ -82,7 +82,7 @@ def calculate_score_from_bases(bases: list[Base]):
                 continue
             scores[base.uid][target_base.uid] = calculate_score_for_base(base, target_base)
         print(scores[base.uid])
-        sort(scores[base.uid])
+        sorted(scores[base.uid])
         print(scores[base.uid])
 
 def get_best_actions(bases: list[Bases]):
