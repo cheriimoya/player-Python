@@ -62,23 +62,21 @@ def decide(gamestate: GameState) -> List[PlayerAction]:
 
     actions = []
 
-
     no_brainers = own_state.get_no_brainers()
 
-    for u, o in no_brainers:
-        if o.population == 0:
+    for unoccupied_base, nearest_own in no_brainers:
+        if nearest_own.population == 0:
             continue
-        actions.append(PlayerAction(o.uid, u.uid, 1))
-        o.population -= 1
-
+        actions.append(PlayerAction(nearest_own.uid, unoccupied_base.uid, 1))
+        nearest_own.population -= 1
 
     nearest_bases = own_state.get_nearest_bases()
 
-    for n in nearest_bases:
-        if n[1].population == 0:
+    for nearest_base in nearest_bases:
+        if nearest_base[1].population == 0:
             continue
-        actions.append(PlayerAction(n[1].uid, n[2].uid, 1))
-        n[1].population -= 1
+        actions.append(PlayerAction(nearest_base[1].uid, nearest_base[2].uid, 1))
+        nearest_base[1].population -= 1
 
 
     for occupied in own_state.occupied_bases:
@@ -87,8 +85,5 @@ def decide(gamestate: GameState) -> List[PlayerAction]:
             continue
         actions.append(PlayerAction(own.uid, occupied.uid, 1))
         own.population -= 1
-
-
-
 
     return actions
