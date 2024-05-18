@@ -15,7 +15,7 @@ class Base:
     def __init__(self, base: dict):
         self.position = Position(base["position"])
         self.uid = base["uid"]
-        self.level = base["player"]
+        self.player = base["player"]
         self.population = base["population"]
-        self.player = base["level"]
+        self.level = base["level"]
         self.units_until_upgrade = base["units_until_upgrade"]
