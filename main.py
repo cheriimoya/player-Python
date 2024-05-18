@@ -1,3 +1,5 @@
+from traceback import print_exc
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -18,5 +20,7 @@ def index():
     print("index")
     try:
         return jsonify([d.serialize() for d in decide(GameState(request.get_json()))])
-    except:
+    except Exception as ex:
+        print(print_exc())
+        print(ex)
         return "Oh boy", 418
