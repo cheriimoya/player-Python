@@ -19,4 +19,4 @@ def index():
     try:
         return jsonify([d.serialize() for d in decide(GameState(request.get_json()))])
     except:
-        return jsonify("[]")
+        return "Oh boy", 418
