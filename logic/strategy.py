@@ -31,8 +31,16 @@ class OwnState:
         no_brainers = []
 
         for unoccupied_base in self.unoccupied_bases:
-            _, nearest_own = self.own_kd_tree.get_nearest([unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z])
-            _, nearest_occupied = self.occupied_kd_tree.get_nearest([unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z])
+            nearest_own = self.own_kd_tree.get_nearest([unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z])
+            nearest_occupied = self.occupied_kd_tree.get_nearest([unoccupied_base.position.x, unoccupied_base.position.y, unoccupied_base.position.z])
+            if nearest_own is None:
+                continue
+            if nearest_occupied is None:
+                continue
+
+            nearest_own = nearest_own[1]
+            nearest_occupied = nearest_occupied[1]
+
 
             print("kd-res", nearest_own, nearest_occupied)
 
