@@ -80,9 +80,10 @@ def decide(gamestate: GameState) -> List[PlayerAction]:
 
 
     for occupied in own_state.occupied_bases:
-        own = own_state.own_kd_tree.get_nearest([occupied.position.x, occupied.position.y, occupied.position.z])[3]
-        if own.population == 0:
+        own = own_state.own_kd_tree.get_nearest([occupied.position.x, occupied.position.y, occupied.position.z])
+        if not own or own[3].population == 0:
             continue
+        own = own[3]
         actions.append(PlayerAction(own.uid, occupied.uid, 1))
         own.population -= 1
 
