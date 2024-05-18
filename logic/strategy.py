@@ -30,7 +30,6 @@ class OwnState:
         print("own_bases", self.own_bases)
         self.own_kd_tree = KDTree([[base.position.x, base.position.y, base.position.z, base] for base in self.own_bases], 3)
 
-
     def get_no_brainers(self) -> List[Tuple[Base, Base]]:
         no_brainers = []
 
@@ -62,36 +61,28 @@ def calculate_score_for_base(src_base: Base, target_base: Base) -> int:
     distance: int = get_base_distance(src_base, target_base)
     target_base_occupied: int = int(target_base.player != 0)
     bits_at_target_base: int = target_base.population
+    own_base: int = int(target_base.player == PLAYER_NUMBER)
 
     factor_distance = 1
     factor_occupied = 100
     factor_bits = 1
+    factor_own = 101
 
-    return factor_distance * distance + factor_occupied * target_base_occupied + factor_bits * bits_at_target_base
+    return factor_distance * distance + factor_occupied * target_base_occupied + factor_bits * bits_at_target_base + factor_own * own_base
 
 
-def calculate_score_from_bases(bases: list[Base]):
+def get_best_actions(base: Base, all_bases: list[Base]):
     scores = {}
-    for base in bases:
-        if base.player != PLAYER_NUMBER:
-            # should not happen
+    for target_base in all_bases:
+        if target_base.uid == base.uid:
+            # target base is own base
             continue
-        scores[base.uid] = {}
-        for target_base in bases:
-            if target_base.uid == base.uid:
-                continue
-            scores[base.uid][target_base.uid] = calculate_score_for_base(base, target_base)
-        print(scores[base.uid])
-        sorted(scores[base.uid])
-        print(scores[base.uid])
-    return scores
+        scores[target_base.uid] = calculate_score_for_base(base, target_base)
+    print(scores)
+    sorted(scores)
+    print(scores)
 
-
-def get_best_actions(bases: list[Base]):
-    actions = []
-    base_scores = calculate_score_from_bases(bases)
-    for score in base_scores:
-        actions.append(PlayerAction(base_scores[score], base_scores[score][0]))
+    return None if not scores else scores[0]
 
 
 def decide(gamestate: GameState) -> List[PlayerAction]:
@@ -99,6 +90,10 @@ def decide(gamestate: GameState) -> List[PlayerAction]:
     print(gamestate)
     own_state = OwnState(gamestate)
 
+    actions = []
+
+    for base in own_state.own_bases:
+        get_best_actions(base, gamestate.bases)
     return get_best_actions(own_state.own_bases)
 
     actions = []
@@ -118,7 +113,6 @@ def decide(gamestate: GameState) -> List[PlayerAction]:
             continue
         actions.append(PlayerAction(nearest_base[1].uid, nearest_base[2].uid, 1))
         nearest_base[1].population -= 1
-
 
     for occupied in own_state.occupied_bases:
         own = own_state.own_kd_tree.get_nearest([occupied.position.x, occupied.position.y, occupied.position.z])
