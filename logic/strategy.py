@@ -18,7 +18,7 @@ def get_base_distance(base1: Base, base2: Base) -> int:
 class OwnState:
 
     def __init__(self, gamestate: GameState):
-        self.unoccupied_bases = [base for base in gamestate.bases if not base.player]
+        self.unoccupied_bases = [base for base in gamestate.bases if base.player == 0]
         self.unoccupied_bases_kd_tree = KDTree([[base.position.x, base.position.y, base.position.z, base] for base in self.unoccupied_bases], 3)
         self.occupied_bases = [base for base in gamestate.bases if base.player and base.player != gamestate.game.player]
         self.occupied_kd_tree = KDTree([[base.position.x, base.position.y, base.position.z, base] for base in self.occupied_bases], 3)
@@ -81,9 +81,9 @@ def decide(gamestate: GameState) -> List[PlayerAction]:
 
     for occupied in own_state.occupied_bases:
         own = own_state.own_kd_tree.get_nearest([occupied.position.x, occupied.position.y, occupied.position.z])
-        if not own or own[3].population == 0:
+        if not own or own[1][3].population == 0:
             continue
-        own = own[3]
+        own = own[1][3]
         actions.append(PlayerAction(own.uid, occupied.uid, 1))
         own.population -= 1
 
