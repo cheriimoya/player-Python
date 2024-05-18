@@ -84,6 +84,7 @@ def calculate_score_from_bases(bases: list[Base]):
         print(scores[base.uid])
         sorted(scores[base.uid])
         print(scores[base.uid])
+    return scores
 
 
 def get_best_actions(bases: list[Base]):
