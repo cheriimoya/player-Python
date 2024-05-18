@@ -128,7 +128,7 @@ python -m unittest logic.strategy_test
       "tick":17,
       "player_count":3,
       "remaining_players":3,
-      "player":1
+      "player":6
    }
 }
 ```
